@@ -1,5 +1,6 @@
 package com.example.taller03.Adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +11,7 @@ import com.example.taller03.R
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.row_coment.view.*
 
-class ComentAdapter(private var arrayList:ArrayList<ComentModel>, private val listener: ComentModelHolder.OnAdapterListener):
+class ComentAdapter(private var arrayList:ArrayList<ComentModel>, val context: Context):
     RecyclerView.Adapter<ComentAdapter.ComentModelHolder>()
 {
 
@@ -19,7 +20,7 @@ class ComentAdapter(private var arrayList:ArrayList<ComentModel>, private val li
 
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ComentModelHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.activity_coment, parent, false)
+        val v = LayoutInflater.from(parent.context).inflate(R.layout.row_coment, parent, false)
         return ComentAdapter.ComentModelHolder(v)
         /*reciclerView_Coment*/
     }
@@ -38,9 +39,6 @@ class ComentAdapter(private var arrayList:ArrayList<ComentModel>, private val li
         }
         holder.itemView.textView_comentario.text = post.comment
 
-
-
-        holder.itemView.setOnClickListener { listener.onItemClickListener(post) }
     }
 
     class ComentModelHolder(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
@@ -60,10 +58,7 @@ class ComentAdapter(private var arrayList:ArrayList<ComentModel>, private val li
         }
 
     }
-    fun updateList(postList: List<ComentModel>) {
-        this.arrayList = postList as ArrayList<ComentModel>
-        this.notifyDataSetChanged()
-    }
+
 }
 
 

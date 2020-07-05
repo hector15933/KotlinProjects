@@ -1,19 +1,23 @@
 package com.example.taller03
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.taller03.Adapter.UsersAdapter
 import com.example.taller03.Model.ComentModel
 import com.example.taller03.Model.UsersModel
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_second.*
-import kotlinx.coroutines.*
-import org.json.JSONObject
-import retrofit2.*
-import retrofit2.converter.gson.GsonConverterFactory
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import retrofit2.HttpException
+
 
 class MainActivity : AppCompatActivity() ,UsersAdapter.UsersModelHolder.OnAdapterListener{
 
@@ -49,7 +53,7 @@ class MainActivity : AppCompatActivity() ,UsersAdapter.UsersModelHolder.OnAdapte
                 try {
                     if(response.isSuccessful) {
                         val posts : List<UsersModel>? = response.body()
-                        val childs:List<ComentModel>
+                        val childs:List<UsersModel>
 
                         if( posts != null) updateInfo(posts)
                     }else{
@@ -89,6 +93,23 @@ class MainActivity : AppCompatActivity() ,UsersAdapter.UsersModelHolder.OnAdapte
 
     override fun onItemClickListener(item: UsersModel) {
 
+        val sharedPreferences= getSharedPreferences("TALLER_KOTLIN_FORM", Context.MODE_PRIVATE)
+        val editor=sharedPreferences.edit()
+
+
+        val gson: Gson= Gson()
+        val jsonResult:String = gson.toJson(item.comment)
+        val arrayList=ArrayList<ComentModel>()
+
+        if (item.comment.isEmpty()){
+            Toast.makeText(this, "El usuario No tiene Comentarios", Toast.LENGTH_SHORT).show()
+        }else{
+
+            val intent = Intent(this, CommentActivity::class.java)
+            intent.putExtra("ARRAY_COMMENT", jsonResult)
+            startActivity(intent)
+
+        }
     }
 
     private fun updateInfo(list: List<UsersModel>) {
