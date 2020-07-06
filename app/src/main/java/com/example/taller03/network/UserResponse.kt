@@ -4,18 +4,14 @@ import com.example.taller03.Model.UsersModel
 import com.google.gson.annotations.SerializedName
 
 data class UserResponse(
-
-    @SerializedName("id")
     val id: String,
-    @SerializedName("user_id")
-    val user_id: String,
-    @SerializedName("username")
     val username: String,
-    @SerializedName("user_image")
-    val user_image: String,
-    @SerializedName("body")
-    val body: String,
-    @SerializedName("image")
+    val name: String,
+    val lastname: String,
     val image: String,
-    @SerializedName("likes")
-    val likes: String)
+    val occupation: String,
+    val age: String,
+    val email: String,
+    val location:String,
+    val phone:String,
+    val social: Social)

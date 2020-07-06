@@ -9,8 +9,9 @@ interface Service {
     @GET("posts")
     fun fetchAllUsers() : Call<List<UsersModel>>
 
+
     @GET("profile")
-    suspend fun getProfile(): Response<UsersModel>
+    suspend fun getProfile(): Response<UserResponse>
 
     @GET("posts")
     suspend fun getPosts(): Response<List<UsersModel>>

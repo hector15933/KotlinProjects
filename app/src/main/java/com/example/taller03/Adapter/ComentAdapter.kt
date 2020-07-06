@@ -31,13 +31,13 @@ class ComentAdapter(private var arrayList:ArrayList<ComentModel>, val context: C
 
     override fun onBindViewHolder(holder: ComentModelHolder, position: Int) {
         val post: ComentModel = this.arrayList[position]
-        holder.itemView.textView_userName.text = post.username
+        holder.itemView.textView_userAmigos.text = post.username
         if (!post.user_image.isBlank()) {
             Picasso.get()
                 .load(post.user_image)
                 .into(holder.itemView.imageView_imgComentarista)
         }
-        holder.itemView.textView_comentario.text = post.comment
+        holder.itemView.textView_PhoneAmigo.text = post.comment
 
     }
 

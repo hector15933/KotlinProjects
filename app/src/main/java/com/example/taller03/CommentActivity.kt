@@ -16,9 +16,6 @@ import org.json.JSONArray
 class CommentActivity : AppCompatActivity() {
 
 
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_comment)
